@@ -52,10 +52,10 @@
 ```
 
 ### 조사 포인트
-- [ ] Windows NT 커널 I/O 서브시스템 발전 역사
-- [ ] Proactor 패턴 vs Reactor 패턴 비교
-- [ ] epoll(Linux), kqueue(BSD)와의 비교
-- [ ] C10K → C10M 문제로의 발전
+- [x] Windows NT 커널 I/O 서브시스템 발전 역사 → [Section1_Background.md](Section1_Background.md)
+- [x] Proactor 패턴 vs Reactor 패턴 비교 → [Section1_Background.md](Section1_Background.md#3-reactor-패턴-vs-proactor-패턴)
+- [x] epoll(Linux), kqueue(BSD)와의 비교 → [Section1_Background.md](Section1_Background.md#5-다른-os의-유사-기술-비교)
+- [x] C10K → C10M 문제로의 발전 → [Section1_Background.md](Section1_Background.md#14-c10k-problem)
 
 ---
 
@@ -137,10 +137,10 @@ struct OVERLAPPED_EX {
 | `ConnectEx` | 비동기 Connect | Socket, sockaddr, Overlapped |
 
 ### 조사 포인트
-- [ ] OVERLAPPED 구조체 Internal 필드의 실제 용도
-- [ ] CompletionKey 활용 패턴 (세션 포인터, 인덱스 등)
-- [ ] NumberOfConcurrentThreads 최적값 결정 방법
-- [ ] IOCP와 Handle 연결 시점 및 해제 처리
+- [x] OVERLAPPED 구조체 Internal 필드의 실제 용도 → [Section2_IOCP_Architecture.md](Section2_IOCP_Architecture.md#21-overlapped-구조체-internal-필드의-실제-용도)
+- [x] CompletionKey 활용 패턴 (세션 포인터, 인덱스 등) → [Section2_IOCP_Architecture.md](Section2_IOCP_Architecture.md#22-completionkey-활용-패턴)
+- [x] NumberOfConcurrentThreads 최적값 결정 방법 → [Section2_IOCP_Architecture.md](Section2_IOCP_Architecture.md#23-numberofconcurrentthreads-최적값-결정-방법)
+- [x] IOCP와 Handle 연결 시점 및 해제 처리 → [Section2_IOCP_Architecture.md](Section2_IOCP_Architecture.md#24-iocp와-handle-연결-시점-및-해제-처리)
 
 ---
 
@@ -210,10 +210,10 @@ DWORD WINAPI WorkerThread(LPVOID lpParam) {
 ```
 
 ### 조사 포인트
-- [ ] WSA_FLAG_OVERLAPPED 플래그 필수 여부
-- [ ] AcceptEx 사용 시 함수 포인터 획득 방법 (WSAIoctl + WSAID_ACCEPTEX)
-- [ ] 초기 Accept 예약 개수 결정 기준
-- [ ] 버퍼 크기 최적화 (MTU, 페이지 단위)
+- [x] WSA_FLAG_OVERLAPPED 플래그 필수 여부 → [Section3_QuickStart.md](Section3_QuickStart.md#31-wsa_flag_overlapped-플래그-필수-여부)
+- [x] AcceptEx 사용 시 함수 포인터 획득 방법 (WSAIoctl + WSAID_ACCEPTEX) → [Section3_QuickStart.md](Section3_QuickStart.md#32-acceptex-함수-포인터-획득-방법)
+- [x] 초기 Accept 예약 개수 결정 기준 → [Section3_QuickStart.md](Section3_QuickStart.md#33-초기-accept-예약-개수-결정-기준)
+- [x] 버퍼 크기 최적화 (MTU, 페이지 단위) → [Section3_QuickStart.md](Section3_QuickStart.md#34-버퍼-크기-최적화)
 
 ---
 
@@ -227,10 +227,10 @@ DWORD WINAPI WorkerThread(LPVOID lpParam) {
 - `Pre-posted accepts`, `Accept 재사용`
 
 #### 조사 포인트
-- [ ] AcceptEx의 출력 버퍼 구조 (로컬/원격 주소 + 첫 데이터)
-- [ ] SO_UPDATE_ACCEPT_CONTEXT 필수 호출 이유
-- [ ] Accept 소켓 재사용 패턴
-- [ ] DisconnectEx + TF_REUSE_SOCKET
+- [x] AcceptEx의 출력 버퍼 구조 (로컬/원격 주소 + 첫 데이터) → [Section4_Research_Report.md](Section4_Research_Report.md#411-acceptex-내부-동작-원리)
+- [x] SO_UPDATE_ACCEPT_CONTEXT 필수 호출 이유 → [Section4_Research_Report.md](Section4_Research_Report.md#411-acceptex-내부-동작-원리)
+- [x] Accept 소켓 재사용 패턴 → [Section4_Research_Report.md](Section4_Research_Report.md#414-accept-소켓-재사용-disconnectex--tf_reuse_socket)
+- [x] DisconnectEx + TF_REUSE_SOCKET → [Section4_Research_Report.md](Section4_Research_Report.md#414-accept-소켓-재사용-disconnectex--tf_reuse_socket)
 
 ### 4.2 Recv/Send 처리
 
@@ -241,10 +241,10 @@ DWORD WINAPI WorkerThread(LPVOID lpParam) {
 - `WSA_IO_PENDING`
 
 #### 조사 포인트
-- [ ] 동기 완료 vs 비동기 완료 판단
-- [ ] Multiple outstanding recv/send 처리
-- [ ] 순서 보장 문제 (특히 Send)
-- [ ] Scatter/Gather I/O 활용
+- [x] 동기 완료 vs 비동기 완료 판단 → [Section4_Research_Report.md](Section4_Research_Report.md#42-recvsend-처리-심화)
+- [x] Multiple outstanding recv/send 처리 → [Section4_Research_Report.md](Section4_Research_Report.md#422-multiple-outstanding-io)
+- [x] 순서 보장 문제 (특히 Send) → [Section4_Research_Report.md](Section4_Research_Report.md#423-send-순서-보장-문제와-해결책)
+- [x] Scatter/Gather I/O 활용 → [Section4_Research_Report.md](Section4_Research_Report.md#421-scattergather-io)
 
 ### 4.3 세션/버퍼 관리
 
@@ -254,10 +254,10 @@ DWORD WINAPI WorkerThread(LPVOID lpParam) {
 - `Lock-free buffer`, `Memory pool`
 
 #### 조사 포인트
-- [ ] 세션 객체 생명주기 관리
-- [ ] 버퍼 할당/해제 전략
-- [ ] 메모리 단편화 방지
-- [ ] Reference counting 패턴
+- [x] 세션 객체 생명주기 관리 → [Section4_Research_Report.md](Section4_Research_Report.md#431-세션-객체-설계-패턴)
+- [x] 버퍼 할당/해제 전략 → [Section4_Research_Report.md](Section4_Research_Report.md#432-object-pool--memory-pool-구현)
+- [x] 메모리 단편화 방지 → [Section4_Research_Report.md](Section4_Research_Report.md#432-object-pool--memory-pool-구현)
+- [x] Reference counting 패턴 → [Section4_Research_Report.md](Section4_Research_Report.md#435-reference-counting으로-생명주기-관리)
 
 ### 4.4 스레드 동기화
 
@@ -268,10 +268,10 @@ DWORD WINAPI WorkerThread(LPVOID lpParam) {
 - `Thread-local storage`
 
 #### 조사 포인트
-- [ ] IOCP 자체 스레드 세이프티 범위
-- [ ] 세션별 Lock granularity
-- [ ] Send 큐잉 동기화 방법
-- [ ] 통계/로깅 동기화
+- [x] IOCP 자체 스레드 세이프티 범위 → [Section4_Research_Report.md](Section4_Research_Report.md#441-iocp-자체의-스레드-세이프티-범위)
+- [x] 세션별 Lock granularity → [Section4_Research_Report.md](Section4_Research_Report.md#442-세션별-lock-granularity)
+- [x] Send 큐잉 동기화 방법 → [Section4_Research_Report.md](Section4_Research_Report.md#443-lock-free-프로그래밍-기법)
+- [x] 통계/로깅 동기화 → [Section4_Research_Report.md](Section4_Research_Report.md#444-interlockedxxx-함수군-활용)
 
 ---
 
@@ -312,10 +312,10 @@ IOCP 내부: NumberOfConcurrentThreads가 실제 동시 실행 제한
 ```
 
 ### 조사 포인트
-- [ ] 대용량 파일 전송 시 메모리 관리
-- [ ] 느린 클라이언트(Slow client) 처리
-- [ ] DoS 공격 방어 패턴
-- [ ] 재연결 처리 패턴
+- [x] 대용량 파일 전송 시 메모리 관리 → [Section5_BestPractices.md](Section5_BestPractices.md#51-대용량-파일-전송-시-메모리-관리)
+- [x] 느린 클라이언트(Slow client) 처리 → [Section5_BestPractices.md](Section5_BestPractices.md#52-느린-클라이언트slow-client-처리)
+- [x] DoS 공격 방어 패턴 → [Section5_BestPractices.md](Section5_BestPractices.md#53-dos-공격-방어-패턴)
+- [x] 재연결 처리 패턴 → [Section5_BestPractices.md](Section5_BestPractices.md#54-재연결-처리-패턴)
 
 ---
 
@@ -371,10 +371,10 @@ Windows 8+에서 도입된 고성능 I/O API
 ```
 
 ### 조사 포인트
-- [ ] RIO vs IOCP 성능 비교
-- [ ] RIO 사용 조건 및 제약사항
-- [ ] TransmitFile 내부 동작
-- [ ] ThreadPool API와 IOCP 통합
+- [x] RIO vs IOCP 성능 비교 → [Section6_AdvancedTopics.md](Section6_AdvancedTopics.md#61-registered-io-rio-vs-iocp-성능-비교)
+- [x] RIO 사용 조건 및 제약사항 → [Section6_AdvancedTopics.md](Section6_AdvancedTopics.md#62-rio-사용-조건-및-제약사항)
+- [x] TransmitFile 내부 동작 → [Section6_AdvancedTopics.md](Section6_AdvancedTopics.md#63-transmitfile-내부-동작)
+- [x] ThreadPool API와 IOCP 통합 → [Section6_AdvancedTopics.md](Section6_AdvancedTopics.md#64-threadpool-api와-iocp-통합)
 
 ---
 
@@ -451,10 +451,10 @@ User Mode: GetQueuedCompletionStatus 반환
 ```
 
 ### 조사 포인트
-- [ ] KQUEUE 구조체 상세 분석
-- [ ] IRP 생명주기
-- [ ] AFD.SYS (Ancillary Function Driver) 역할
-- [ ] MaximumConcurrency=0 시 동작 (CPU 코어 수 사용)
+- [x] KQUEUE 구조체 상세 분석 → [Section7_IOCP_Internals.md](Section7_IOCP_Internals.md#71-kqueue-구조체-상세-분석)
+- [x] IRP 생명주기 → [Section7_IOCP_Internals.md](Section7_IOCP_Internals.md#72-irp-생명주기)
+- [x] AFD.SYS (Ancillary Function Driver) 역할 → [Section7_IOCP_Internals.md](Section7_IOCP_Internals.md#73-afdsys-ancillary-function-driver-역할)
+- [x] MaximumConcurrency=0 시 동작 (CPU 코어 수 사용) → [Section7_IOCP_Internals.md](Section7_IOCP_Internals.md#74-maximumconcurrency0-시-동작)
 
 ---
 
@@ -507,10 +507,10 @@ IOCP 스레드에서 직접 처리 vs 로직 스레드로 위임
 ```
 
 ### 조사 포인트
-- [ ] 동시접속 5,000명+ 서버 구조
-- [ ] 패킷 암호화/압축 처리 위치
-- [ ] 채팅, 거래 등 시스템별 처리 방식
-- [ ] 로그인 서버, 게임 서버, 채팅 서버 분리 구조
+- [x] 동시접속 5,000명+ 서버 구조 → [Section8_MMORPG_Application.md](Section8_MMORPG_Application.md#81-동시접속-5000명-서버-구조)
+- [x] 패킷 암호화/압축 처리 위치 → [Section8_MMORPG_Application.md](Section8_MMORPG_Application.md#82-패킷-암호화압축-처리-위치)
+- [x] 채팅, 거래 등 시스템별 처리 방식 → [Section8_MMORPG_Application.md](Section8_MMORPG_Application.md#83-채팅-거래-등-시스템별-처리-방식)
+- [x] 로그인 서버, 게임 서버, 채팅 서버 분리 구조 → [Section8_MMORPG_Application.md](Section8_MMORPG_Application.md#84-로그인-서버-게임-서버-채팅-서버-분리-구조)
 
 ---
 
@@ -536,11 +536,28 @@ Week 4: 적용
 
 ---
 
-## 참고 자료 (추후 조사용)
+## 상세 리서치 문서 목록
+
+| 섹션 | 문서 | 상태 |
+|------|------|------|
+| Section 1 | [Section1_Background.md](Section1_Background.md) - 도입 배경 및 문제 정의 | 완료 |
+| Section 2 | [Section2_IOCP_Architecture.md](Section2_IOCP_Architecture.md) - IOCP 개념 및 아키텍처 | 완료 |
+| Section 3 | [Section3_QuickStart.md](Section3_QuickStart.md) - Quick Start 상세 가이드 | 완료 |
+| Section 4 | [Section4_Research_Report.md](Section4_Research_Report.md) - 핵심 Topic별 상세 | 완료 |
+| Section 5 | [Section5_BestPractices.md](Section5_BestPractices.md) - Best Practices & Patterns | 완료 |
+| Section 6 | [Section6_AdvancedTopics.md](Section6_AdvancedTopics.md) - Advanced Topics | 완료 |
+| Section 7 | [Section7_IOCP_Internals.md](Section7_IOCP_Internals.md) - IOCP Internals | 완료 |
+| Section 8 | [Section8_MMORPG_Application.md](Section8_MMORPG_Application.md) - MMORPG 적용 사례 | 완료 |
+| 부록 | [Rookiss_Code_Structure_Analysis.md](Rookiss_Code_Structure_Analysis.md) - Rookiss 코드 분석 | 완료 |
+
+---
+
+## 참고 자료
 
 ### 공식 문서
-- MSDN I/O Completion Ports
-- Windows Internals (Book)
+- [Microsoft Docs: I/O Completion Ports](https://learn.microsoft.com/en-us/windows/win32/fileio/i-o-completion-ports)
+- [Microsoft Docs: Winsock Reference](https://learn.microsoft.com/en-us/windows/win32/winsock/winsock-reference)
+- Windows Internals, 7th Edition (Mark Russinovich)
 - Winsock Programmer's FAQ
 
 ### 오픈소스 참고
@@ -553,5 +570,6 @@ Week 4: 적용
 IOCP, I/O Completion Port, Overlapped I/O,
 WSARecv, WSASend, AcceptEx, GetQueuedCompletionStatus,
 Proactor pattern, Windows async I/O,
-MMORPG server architecture, Game server network
+MMORPG server architecture, Game server network,
+Registered I/O (RIO), KQUEUE, AFD.SYS, IRP
 ```
