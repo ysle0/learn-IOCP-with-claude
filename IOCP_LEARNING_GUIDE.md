@@ -9,6 +9,9 @@
 6. [Advanced Topics](#6-advanced-topics)
 7. [IOCP Internals](#7-iocp-internals)
 8. [MMORPG 적용 사례](#8-mmorpg-적용-사례)
+9. [Visual Studio Code에서 IOCP 개발하기](#9-visual-studio-code에서-iocp-개발하기)
+10. [다른 게임 장르에서의 IOCP 사용 케이스](#10-다른-게임-장르에서의-iocp-사용-케이스)
+11. [C++ Wrapper Library/Framework 소개](#11-c-wrapper-libraryframework-소개)
 
 ---
 
@@ -514,6 +517,84 @@ IOCP 스레드에서 직접 처리 vs 로직 스레드로 위임
 
 ---
 
+## 9. Visual Studio Code에서 IOCP 개발하기
+
+### 핵심 키워드
+- `CMake`, `MSVC Build Tools`, `cl.exe`
+- `c_cpp_properties.json`, `tasks.json`, `launch.json`
+- `cppvsdbg`, `WIN32_LEAN_AND_MEAN`, `_WIN32_WINNT`
+- `winsock2.h`, `mswsock.h`, `ws2_32.lib`
+
+### 개요
+```
+Visual Studio Code에서 IOCP 프로젝트 개발 환경 구성:
+- Visual Studio Build Tools (MSVC 컴파일러) 설치
+- CMake 프로젝트 구성 및 IOCP 전용 설정
+- IntelliSense, 디버깅, 빌드 자동화 구성
+- MinGW 대안 환경 (제한 사항 포함)
+```
+
+### 조사 포인트
+- [x] MSVC Build Tools 설치 및 VS Code 연동 → [Section9_VSCode_Development.md](Section9_VSCode_Development.md#91-개발-환경-설치-및-구성)
+- [x] CMakeLists.txt IOCP 전용 설정 (링커 플래그, 매크로) → [Section9_VSCode_Development.md](Section9_VSCode_Development.md#92-cmake-프로젝트-구성)
+- [x] winsock2.h / windows.h 헤더 순서 문제 해결 → [Section9_VSCode_Development.md](Section9_VSCode_Development.md#97-트러블슈팅)
+- [x] cppvsdbg 디버거 설정 및 OVERLAPPED 구조체 디버깅 → [Section9_VSCode_Development.md](Section9_VSCode_Development.md#94-디버깅-환경-구성)
+
+---
+
+## 10. 다른 게임 장르에서의 IOCP 사용 케이스
+
+### 핵심 키워드
+- `FPS/TPS`: Snapshot interpolation, Delta compression, Lag compensation
+- `RTS/MOBA`: Lockstep, Deterministic simulation, InputBundle
+- `Fighting`: Rollback netcode, GGPO, P2P relay
+- `Turn-based`: High concurrency, Low bandwidth
+- `Casual/Social`: WebSocket + IOCP, Matchmaking
+
+### 개요
+```
+게임 장르별 네트워킹 특성과 IOCP 활용:
+- FPS/TPS: UDP+IOCP 하이브리드, 초당 60-128 tick
+- RTS/MOBA: Lockstep 동기화, 결정론적 시뮬레이션
+- Fighting: P2P 릴레이, 롤백 넷코드
+- Turn-based: 낮은 I/O 빈도, 높은 동시접속
+- 비게임: IIS, Node.js(libuv), SQL Server 활용 사례
+```
+
+### 조사 포인트
+- [x] FPS 장르 네트워크 아키텍처 (UDP+IOCP, 100인 배틀로얄 대역폭) → [Section10_Game_Genre_Cases.md](Section10_Game_Genre_Cases.md#101-fpstps-장르)
+- [x] RTS/MOBA 장르 동기화 방식 (Lockstep, Fog of War 필터링) → [Section10_Game_Genre_Cases.md](Section10_Game_Genre_Cases.md#102-rtsmoba-장르)
+- [x] 격투/턴제 게임의 IOCP 활용 → [Section10_Game_Genre_Cases.md](Section10_Game_Genre_Cases.md#103-격투-게임-장르)
+- [x] 비게임 분야 IOCP 활용 사례 → [Section10_Game_Genre_Cases.md](Section10_Game_Genre_Cases.md#106-비게임-분야-iocp-활용)
+
+---
+
+## 11. C++ Wrapper Library/Framework 소개
+
+### 핵심 키워드
+- `Boost.Asio`, `co_await`, `io_context`
+- `libuv`, `uv_loop_t`, `Single-threaded event loop`
+- `Windows Thread Pool API`, `CreateThreadpoolIo`
+- `GameNetworkingSockets`, `ENet`, `KCP`
+
+### 개요
+```
+IOCP를 추상화하는 주요 C++ 라이브러리/프레임워크:
+- Boost.Asio: C++ 표준 기반, C++20 코루틴 지원, IOCP 내부 활용
+- libuv: C 기반, Node.js 엔진, 크로스 플랫폼
+- Windows Thread Pool API: OS 네이티브 콜백 기반
+- 커스텀 경량 래퍼: 직접 구현 패턴
+- 게임 전용: Valve GameNetworkingSockets, ENet, KCP
+```
+
+### 조사 포인트
+- [x] Boost.Asio 내부 IOCP 매핑 및 C++20 코루틴 패턴 → [Section11_Cpp_Libraries.md](Section11_Cpp_Libraries.md#111-boostasio)
+- [x] libuv 아키텍처와 IOCP 활용 방식 → [Section11_Cpp_Libraries.md](Section11_Cpp_Libraries.md#112-libuv)
+- [x] 커스텀 IOCP 래퍼 클래스 설계 패턴 → [Section11_Cpp_Libraries.md](Section11_Cpp_Libraries.md#114-커스텀-경량-iocp-래퍼)
+- [x] 게임 전용 네트워크 프레임워크 비교 → [Section11_Cpp_Libraries.md](Section11_Cpp_Libraries.md#115-게임-전용-네트워크-프레임워크)
+
+---
+
 ## 학습 로드맵
 
 ```
@@ -528,10 +609,13 @@ Week 2: 심화
 
 Week 3: 고급
 ├── Advanced Topics (Section 6)
-└── Internals 이해 (Section 7)
+├── Internals 이해 (Section 7)
+└── VS Code 개발 환경 구축 (Section 9)
 
 Week 4: 적용
-└── MMORPG 서버 프로토타입 (Section 8)
+├── MMORPG 서버 프로토타입 (Section 8)
+├── 다양한 게임 장르 활용 (Section 10)
+└── C++ 라이브러리/프레임워크 활용 (Section 11)
 ```
 
 ---
@@ -548,6 +632,9 @@ Week 4: 적용
 | Section 6 | [Section6_AdvancedTopics.md](Section6_AdvancedTopics.md) - Advanced Topics | 완료 |
 | Section 7 | [Section7_IOCP_Internals.md](Section7_IOCP_Internals.md) - IOCP Internals | 완료 |
 | Section 8 | [Section8_MMORPG_Application.md](Section8_MMORPG_Application.md) - MMORPG 적용 사례 | 완료 |
+| Section 9 | [Section9_VSCode_Development.md](Section9_VSCode_Development.md) - VS Code에서 IOCP 개발하기 | 완료 |
+| Section 10 | [Section10_Game_Genre_Cases.md](Section10_Game_Genre_Cases.md) - 다른 게임 장르에서의 IOCP 사용 케이스 | 완료 |
+| Section 11 | [Section11_Cpp_Libraries.md](Section11_Cpp_Libraries.md) - C++ Wrapper Library/Framework 소개 | 완료 |
 | 부록 | [Rookiss_Code_Structure_Analysis.md](Rookiss_Code_Structure_Analysis.md) - Rookiss 코드 분석 | 완료 |
 
 ---
