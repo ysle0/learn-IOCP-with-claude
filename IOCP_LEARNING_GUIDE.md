@@ -268,7 +268,7 @@ DWORD WINAPI WorkerThread(LPVOID lpParam) {
 - `Thread-local storage`
 
 #### 조사 포인트
-- [ ] IOCP 자체 스레드 세이프티 범위
+- [ ] IOCP 자체의 스레드 세이프티 범위
 - [ ] 세션별 Lock granularity
 - [ ] Send 큐잉 동기화 방법
 - [ ] 통계/로깅 동기화
@@ -384,14 +384,14 @@ Windows 8+에서 도입된 고성능 I/O API
 - `I/O Request Packet (IRP)`
 - `Wait queue`, `Release queue`
 - `Last In First Out (LIFO)` 스레드 선택
-- `APC`, `KQUEUE`
+- `APC`, `_KQUEUE (커널 내부)
 
 ### 7.1 커널 내부 구조
 
 ```
 IOCP 내부 구조:
 ┌────────────────────────────────────────┐
-│           KQUEUE (커널 객체)            │
+│           _KQUEUE (커널 내부)           │
 ├────────────────────────────────────────┤
 │  ┌──────────────────────────────────┐  │
 │  │       Completion Packet List      │  │ ← 완료된 I/O 패킷 (FIFO)
@@ -451,7 +451,7 @@ User Mode: GetQueuedCompletionStatus 반환
 ```
 
 ### 조사 포인트
-- [ ] KQUEUE 구조체 상세 분석
+- [ ] _KQUEUE 구조체 상세 분석
 - [ ] IRP 생명주기
 - [ ] AFD.SYS (Ancillary Function Driver) 역할
 - [ ] MaximumConcurrency=0 시 동작 (CPU 코어 수 사용)

@@ -309,7 +309,7 @@ public:
 // 잘못된 예: ConnectEx로 사용한 소켓을 AcceptEx에 재사용
 SOCKET sock = ConnectEx(...);  // 클라이언트 연결용
 DisconnectEx(sock, TF_REUSE_SOCKET);
-AcceptEx(listenSock, sock, ...);  // 오류 10022 (WSAEINVAL) 발생!
+AcceptEx(listenSock, sock, ...);  // 오류 10022(WSAEINVAL) 발생!
 
 // 올바른 예: 용도별로 소켓 풀 분리
 SocketPool m_acceptSocketPool;   // Accept 전용
@@ -574,7 +574,7 @@ void OnRecvComplete(DWORD bytesTransferred) {
 ```cpp
 // 나쁜 예: 100만 개 버퍼 사용
 WSABUF buffers[1000000];  // malloc/free per buffer, IOCP per buffer
-// ASIO 이슈: 매우 느림
+// (참고) Boost.ASIO에서 다수의 버퍼를 사용할 때 유사한 성능 저하 이슈가 보고된 바 있음
 
 // 좋은 예: 적절한 버퍼 개수 (보통 2-10개)
 WSABUF buffers[4];
@@ -1484,6 +1484,7 @@ public:
             // Lock-free push
             while (!m_freeList.compare_exchange_weak(node->next, node)) {
                 // CAS 실패 시 재시도
+                // 높은 경합 상황에서는 CPU 부하를 줄이기 위해 _mm_pause() 같은 힌트를 사용할 수 있음
             }
         }
     }

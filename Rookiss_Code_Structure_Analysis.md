@@ -384,7 +384,7 @@ class Program
 
 | 항목 | C++ | C# |
 |------|-----|-----|
-| **I/O 모델** | IOCP (직접 구현) | SocketAsyncEventArgs (내장) |
+| **I/O 모델** | IOCP (Win32 API 직접 사용) | SocketAsyncEventArgs (IOCP 내장 래퍼) |
 | **메모리 관리** | shared_ptr, custom allocator | GC (가비지 컬렉션) |
 | **스레드 풀** | 직접 관리 (ThreadManager) | ThreadPool 내장 |
 | **이벤트 처리** | IocpEvent + Dispatch() | Completed += 콜백 |
@@ -403,7 +403,7 @@ class Program
 
 ### 결론
 
-> C#은 C++의 IOCP 로직을 **`SocketAsyncEventArgs`로 대체**했을 뿐,
+> C#은 C++의 IOCP 로직을 **`SocketAsyncEventArgs`로 추상화**했을 뿐,
 > **클래스 구조와 책임 분리는 완전히 동일**합니다.
 
 따라서 C++ 또는 C# 한 쪽만 이해하면 다른 언어로 이식하기 매우 쉽습니다.
